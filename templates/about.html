@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Über uns</h1>
+    <p class="text-center">Erfahren Sie mehr über unser Unternehmen, unsere Mission und unsere Werte.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Unsere Geschichte</h3>
+            <p>
+                Wir sind ein führendes E-Commerce-Unternehmen, das gegründet wurde, um Kunden weltweit die besten
+                Produkte und den besten Service zu bieten.
+                Seit unserer Gründung im Jahr 2020 haben wir uns auf Innovation, Qualität und Kundenzufriedenheit
+                konzentriert.
+            </p>
+            <p>
+                Unser Ziel ist es, das Einkaufserlebnis so angenehm und einfach wie möglich zu gestalten. Von Mode bis
+                Technik – wir haben eine breite Palette von Produkten, die den unterschiedlichen Bedürfnissen unserer
+                Kunden gerecht werden.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://via.placeholder.com/500x300" class="img-fluid" alt="Unser Team">
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <img src="https://via.placeholder.com/500x300" class="img-fluid" alt="Unsere Vision">
+        </div>
+        <div class="col-md-6">
+            <h3>Unsere Mission und Vision</h3>
+            <p>
+                Unser Unternehmen ist bestrebt, das beste Einkaufserlebnis zu bieten, indem wir qualitativ hochwertige
+                Produkte und außergewöhnlichen Kundenservice bereitstellen.
+                Unsere Vision ist es, in der Welt des Online-Handels führend zu sein und gleichzeitig nachhaltige
+                Geschäftspraktiken zu fördern.
+            </p>
+            <p>
+                Wir arbeiten kontinuierlich daran, uns zu verbessern, indem wir innovative Technologien einsetzen, um
+                den Einkaufsprozess effizienter und angenehmer zu gestalten.
+                Unser Fokus liegt auf Nachhaltigkeit, Kundenzufriedenheit und einer globalen Reichweite.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h3>Unser Team</h3>
+            <p>
+                Unser Team besteht aus engagierten Fachleuten, die leidenschaftlich daran arbeiten, Ihnen die besten
+                Produkte und Dienstleistungen anzubieten.
+                Wir glauben an die Kraft der Zusammenarbeit und an die stetige Weiterentwicklung, um Ihnen das Beste zu
+                bieten.
+            </p>
+            <div class="mb-4">
+                <a href="{% url 'contact' %}" class="btn btn-primary">Kontaktieren Sie uns</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

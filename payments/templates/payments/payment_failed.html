@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h2 class="text-danger">❌ Zahlung fehlgeschlagen</h2>
+  <p>Leider konnte Ihre Zahlung nicht abgeschlossen werden.</p>
+  {% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+  {% endif %}
+  <a href="{% url 'checkout' %}" class="btn btn-warning mt-3">Erneut versuchen</a>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Kontakt Seite{% endblock %}
+
+
+{% block content %} 
+
+<div class="container mt-5">
+    <h1 class="text-center">Kontaktieren Sie uns</h1>
+    <p class="text-center">Haben Sie Fragen oder benötigen Sie Hilfe? Füllen Sie das untenstehende Formular aus, und wir
+        werden uns so schnell wie möglich bei Ihnen melden.</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Ihr Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required
+                        placeholder="Geben Sie Ihren Namen ein">
+                </div>
+                <div class="form-group">
+                    <label for="email">Ihre E-Mail-Adresse</label>
+                    <input type="email" class="form-control" id="email" name="email" required
+                        placeholder="Geben Sie Ihre E-Mail-Adresse ein">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nachricht</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required
+                        placeholder="Geben Sie hier Ihre Nachricht ein"></textarea>
+                </div>
+                <div class="my-4" my >
+                    <a href="{% url 'danke' %}" type="submit" class="btn btn-primary btn-block">Nachricht senden
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if message_sent %}
+    <div class="alert alert-success mt-4">
+        Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen melden.
+    </div>
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Warenkorb</h2>
+    {% if cart.items.all %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Menge</th>
+                    <th>Preis</th>
+                    <th>Gesamt</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>${{ item.total_price }}</td>
+                    <td>
+                        <a href="{% url 'cart:update_cart_item' item.id %}" class="btn btn-sm btn-secondary">Menge ändern</a>
+                        <a href="{% url 'cart:remove_from_cart' item.id %}" class="btn btn-sm btn-danger">Entfernen</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form method="post" action="{% url 'orders:checkout' %}">
+            {% csrf_token %}
+            <!-- andere Felder, z. B. Name, Email usw. -->
+            <input type="hidden" name="amount" value="{{ total_price }}">
+            <button type="submit" class="btn btn-primary">Jetzt bezahlen</button>
+        </form>
+        
+
+    {% else %}
+        <p>Ihr Warenkorb ist leer.</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'orders:checkout' %}">Checkout</a>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- {% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Payment Successful</h2>
+    <p>Thank you for your payment!</p>
+</div>
+{% endblock %} -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h2 class="text-success">✅ Zahlung erfolgreich!</h2>
+  <p>Vielen Dank, {{ payment.name }}.</p>
+  <p>Betrag: <strong>{{ payment.amount }} €</strong></p>
+  <p>Transaktions-ID: <code>{{ payment.stripe_payment_id }}</code></p>
+  <a href="/" class="btn btn-primary mt-3">Zurück zur Startseite</a>
+</div>
+{% endblock %}

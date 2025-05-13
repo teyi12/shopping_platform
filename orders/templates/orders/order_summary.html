@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Summary{% endblock %}
+{% block content %}
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Bestellübersicht</h2>
+        
+        <!-- Bestelldetails -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Bestellinformationen</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Bestellnummer:</strong> {{ order.id }}</p>
+                <p><strong>Erstellt am:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+                <p><strong>Gesamtbetrag:</strong> ${{ order.total_price }}</p>
+                <!-- <p><strong>Adresse:</strong> {{ order.address }}</p> -->
+                <!-- <p><strong>Postleitzahl:</strong> {{ order.postal_code }}</p> -->
+                <p><strong>Stadt:</strong> {{ order.city }}</p>
+            </div>
+        </div>
+
+        <!-- Artikel in der Bestellung -->
+        <div class="card">
+            <div class="card-header">
+                <h5>Artikel in Ihrer Bestellung</h5>
+            </div>
+            <div class="card-body">
+                {% if order.items.all %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Menge</th>
+                                <th>Einzelpreis</th>
+                                <th>Gesamtpreis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.items.all %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>${{ item.price }}</td>
+                                    <td>${{ item.quantity|floatformat:2|add:item.price }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Keine Artikel in dieser Bestellung.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Zurück zur Übersicht -->
+        <div class="mt-4">
+            <a href="{% url 'orders:order_list' %}" class="btn btn-primary">Zurück zur Bestellübersicht</a>
+        </div>
+    </div>
+    {% endblock %}

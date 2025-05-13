@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="text-center">Welcome to our shopping platform!</h1>
+        <p class="text-center">Browse our ninth products and offers:</p>
+        <a href="{% url 'shop:product_list' %}" type="button" class="my-4 btn btn-primary">Products</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <img class="w-100" src="{% get_media_prefix %}/products/cart.jpg" alt="Platform Image">
+        </div>
+        <div class="col-lg-6 text-justify">
+
+            <h2>Our Vision</h2>
+            <hr class="my-4">
+            <p class="lead">
+                Unser Unternehmen ist bestrebt, das beste Einkaufserlebnis zu bieten, indem wir qualitativ hochwertige
+                Produkte
+                und außergewöhnlichen Kundenservice bereitstellen. Unsere Vision ist es, in der Welt des Online-Handels
+                führend zu sein und gleichzeitig nachhaltige Geschäftspraktiken zu fördern.
+
+                Wir arbeiten kontinuierlich daran, uns zu verbessern, indem wir innovative Technologien einsetzen, um
+                den
+                Einkaufsprozess effizienter und angenehmer zu gestalten.
+                Unser Fokus liegt auf Nachhaltigkeit, Kundenzufriedenheit und einer globalen Reichweite.
+
+            </p>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row">
+        {% if products %}
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img width="20px" src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                        <p class="card-text"><strong>{{ product.price }} €</strong></p>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p class="text-center">Our products</p>
+        </div>
+        {% endif %}
+    </div> -->
+</div>
+{% endblock %}

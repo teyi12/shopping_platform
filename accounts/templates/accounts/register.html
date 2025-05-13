@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+
+
+
+<div class="container mt-5">
+    <h2>Benutzerregistrierung</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <!-- Benutzername -->
+        <div class="mb-3">
+            <label for="username">Benutzername</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+    
+        <!-- E-Mail -->
+        <div class="mb-3">
+            <label for="email">E-Mail</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+    
+        <!-- Adresse -->
+        <div class="mb-3">
+            <label for="address">Adresse</label>
+            <textarea class="form-control" name="address"></textarea>
+        </div>
+    
+        <!-- Telefon -->
+        <div class="mb-3">
+            <label for="phone">Telefonnummer</label>
+            <input type="text" class="form-control" name="phone">
+        </div>
+    
+        <!-- Bild -->
+        <div class="mb-3">
+            <label for="image">Profilbild</label>
+            <input type="file" class="form-control" name="image">
+        </div>
+    
+        <!-- Passwort -->
+        <div class="mb-3">
+            <label for="password">Passwort</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Registrieren</button>
+    </form>
+    
+</div>
+
+{% endblock %}
+
