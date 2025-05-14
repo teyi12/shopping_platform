@@ -27,15 +27,16 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}">SHOP</a></li>
                     
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
-                   
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">REGISTER</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'cart:cart_detail' %}">CART</a></li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'category_list' %}active{% endif %}"
                             href="{% url 'shop:category_list' %}">CATEGORIES</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'orders:order_list' %}">ORDERS</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">REGISTER</a></li>
+                    
                     {% if user.is_authenticated %}
+                    
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">PROFILE</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li>
                     {% else %}

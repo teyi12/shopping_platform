@@ -7,33 +7,32 @@ from django.conf import settings
 import stripe
 from payments.models import Payment
 
-# def order_list(request):
-#     orders = Order.objects.filter(user=request.user)
-#     return render(request, 'orders/order_list.html', {'orders': orders})
 
-stripe.api_key = settings.skripe_key = 'django-insecure-o9&a*mb08)v1p7e9bq-lomvf6!kyo7)h-01l%@eksl@f#cbs3t'
+
+stripe.api_key = settings.stripe_key 
 
 @login_required
 def order_list(request):
     orders = Order.objects.filter(user=request.user)
     return render(request, 'orders/order_list.html', {'orders': orders})
 
+
 @login_required
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
     return render(request, 'orders/order_detail.html', {'order': order})
 
-# @login_required
-# def update_order_status(request, order_id):
-#     order = get_object_or_404(Order, id=order_id)
-#     if request.method == 'POST':
-#         form = OrderForm(request.POST, instance=order)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('orders:order_list')
-#     else:
-#         form = OrderForm(instance=order)
-#     return render(request, 'orders/update_order_status.html', {'form': form, 'order': order})
+@login_required
+def update_order_status(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('orders:order_list')
+    else:
+        form = OrderForm(instance=order)
+    return render(request, 'orders/update_order_status.html', {'form': form, 'order': order})
 
 @login_required
 def order_summary(request):
@@ -44,15 +43,15 @@ def order_summary(request):
     return render(request, 'orders/order_summary.html', {'orders': orders})
 
 @login_required
-# def checkout(request):
-    # cart = Cart.objects.get(user=request.user)
-    # if request.method == 'POST':
-    #     # Hier könnte die Logik für den Abschluss der Bestellung stehen
-    #     order = Order.objects.create(user=request.user)
-    #     # Nach der Bestellung den Warenkorb leeren
-    #     cart.clear()
-    #     return redirect('orders:order_summary')
-    # return render(request, 'orders/checkout.html', {'cart': cart})
+def checkout(request):
+    cart = Cart.objects.get(user=request.user)
+    if request.method == 'POST':
+        # Hier könnte die Logik für den Abschluss der Bestellung stehen
+        order = Order.objects.create(user=request.user)
+        # Nach der Bestellung den Warenkorb leeren
+        cart.clear()
+        return redirect('orders:order_summary')
+    return render(request, 'orders/checkout.html', {'cart': cart})
 
 def checkout(request):
     amount_str = request.POST.get("amount")

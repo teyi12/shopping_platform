@@ -6,34 +6,6 @@ from .forms import UserRegistrationForm, LoginForm, UserProfileForm
 from .models import UserProfile
 
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                email=form.cleaned_data['email'],
-                password=form.cleaned_data['password']
-            )
-            # Create UserProfile
-            UserProfile.objects.create(
-                user=user,
-                address=form.cleaned_data['address'],
-                phone_number=form.cleaned_data['phone_number']
-            )
-            login(request, user)
-            return redirect('home')  # Redirect to a success page
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'accounts/register.html', {'form': form})
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login
-from django.contrib import messages
-
-
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -80,10 +52,6 @@ def user_login(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 
-from django.shortcuts import render, redirect
-from .models import UserProfile
-from .forms import UserProfileForm
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def profile(request):
@@ -102,14 +70,13 @@ def user_logout(request):
     logout(request)
     return redirect('accounts:login')
 
-
-
-
-
-
-# Profilansicht
 @login_required
 def profile_view(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
     return render(request, 'accounts/profile.html', {'user_profile': user_profile})
+
+
+
+
+
 

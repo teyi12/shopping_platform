@@ -19,7 +19,7 @@
                 <li class="list-group-item"><strong>Datum:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</li>
                 <li class="list-group-item"><strong>Adresse:</strong> {{ order.address }}</li>
                 <li class="list-group-item"><strong>PLZ, Stadt:</strong> {{ order.postal_code }}, {{ order.city }}</li>
-                <li class="list-group-item"><strong>Gesamtbetrag:</strong> €{{ order.total|floatformat:2 }}</li>
+                <li class="list-group-item"><strong>Gesamtbetrag:</strong> €{{ order.total_price|floatformat:2 }}</li>
             </ul>
         </div>
     </div>
