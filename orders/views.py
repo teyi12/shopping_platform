@@ -9,7 +9,7 @@ from payments.models import Payment
 
 
 
-stripe.api_key = settings.stripe_key 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required
 def order_list(request):
