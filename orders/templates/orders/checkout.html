@@ -21,6 +21,7 @@
                             <input type="text" name="phone_number" id="phone_number" class="form-control"
                                 placeholder="Geben Sie Ihre Telefonnummer ein" required>
                         </div>
+                        
                         <h5 class="card-title mt-4">Bestellübersicht</h5>
                         <ul class="list-group mb-3">
                             {% for item in cart.items.all %}
@@ -29,9 +30,11 @@
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ item.product.name }} (x{{ item.quantity }})
-                                <span class="fw-bold">{{ item.total_price|floatformat:2 }} €</span>
+                                <span class="fw-bold">{{ cart.total_price|floatformat:2 }} €
+</span>
                             </li>
-                         
+                        
+
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <strong>Gesamt:</strong>
                                 <span class="fw-bold">{{ cart.total_price|floatformat:2 }} €</span>

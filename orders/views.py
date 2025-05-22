@@ -93,3 +93,39 @@ def checkout_view(request):
     return render(request, 'orders/checkout.html', {'cart': cart})
     
 
+from django.shortcuts import render, redirect
+from cart.models import Cart
+from .models import Order
+
+def checkout_address_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        return redirect('cart:cart_detail')
+
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        phone_number = request.POST.get('phone_number')
+        city = request.POST.get('city')
+        postal_code = request.POST.get('postal_code')
+
+        order = Order.objects.create(
+            user=request.user,
+            cart=cart,
+            address=address,
+            phone_number=phone_number,
+            city=city,
+            postal_code=postal_code,
+            paid=False
+        )
+
+        return redirect('orders:order_success')
+
+    return render(request, 'orders/checkout.html', {'cart': cart})
+
+
+def order_success(request):
+    return render(request, 'orders/success.html')
