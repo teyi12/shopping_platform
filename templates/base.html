@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Janoschka_Shopping_Plattform{% endblock %}</title>
+    <title>{% block title %}TeyiSomadje_Shop{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
@@ -19,13 +19,15 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">JANOSCHKA SHOPPING</a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img width="75px" src="{% static 'logo.webp' %}" alt="">TEYISOMADJE SHOPPING
+            </a>
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">ABOUT US</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}">SHOP</a></li>
-                    
+
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">REGISTER</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'cart:cart_detail' %}">CART</a></li>
@@ -34,9 +36,9 @@
                             href="{% url 'shop:category_list' %}">CATEGORIES</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'orders:order_list' %}">ORDERS</a></li>
-                    
+
                     {% if user.is_authenticated %}
-                    
+
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">PROFILE</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li>
                     {% else %}
@@ -55,11 +57,13 @@
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3 mt-5">
-        &copy; {{ year }} Janoschka_Shopping_Plattform. All Rights Reserved.
+        &copy; {{ 2025 }} TeyiSomadje_Shopping. All Rights Reserved.
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -13,32 +13,25 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="address" class="form-label">Adresse</label>
-                            <input 
-                                type="text" 
-                                name="address" 
-                                id="address" 
-                                class="form-control" 
-                                placeholder="Geben Sie Ihre Lieferadresse ein" 
-                                required>
+                            <input type="text" name="address" id="address" class="form-control"
+                                placeholder="Geben Sie Ihre Lieferadresse ein" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone_number" class="form-label">Telefonnummer</label>
-                            <input 
-                                type="text" 
-                                name="phone_number" 
-                                id="phone_number" 
-                                class="form-control" 
-                                placeholder="Geben Sie Ihre Telefonnummer ein" 
-                                required>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control"
+                                placeholder="Geben Sie Ihre Telefonnummer ein" required>
                         </div>
                         <h5 class="card-title mt-4">Bestellübersicht</h5>
                         <ul class="list-group mb-3">
                             {% for item in cart.items.all %}
+                            {{ item.product.name }} (x{{ item.quantity }}) 
+                            {% endfor %}
+
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{ item.product.name }} (x{{ item.quantity }})
                                 <span class="fw-bold">{{ item.total_price|floatformat:2 }} €</span>
                             </li>
-                            {% endfor %}
+                         
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <strong>Gesamt:</strong>
                                 <span class="fw-bold">{{ cart.total_price|floatformat:2 }} €</span>

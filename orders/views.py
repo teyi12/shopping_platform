@@ -53,51 +53,43 @@ def checkout(request):
         return redirect('orders:order_summary')
     return render(request, 'orders/checkout.html', {'cart': cart})
 
-def checkout(request):
-    amount_str = request.POST.get("amount")
+# checkout/views.py
+from .models import Order
 
-    if not amount_str:
-        return render(request, "payments/checkout.html", {
-        "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
-        "error": "Bitte geben Sie einen gültigen Betrag ein."
-    })
-
-    try:
-        amount = int(float(amount_str) * 100)
-    except ValueError:
-        return render(request, "payments/checkout.html", {
-        "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
-        "error": "Ungültiger Betrag."
-    })
+def order_success(request):
+    latest_order = Order.objects.filter(user=request.user).order_by('-created').first()
+    return render(request, 'checkout/success.html', {'order': latest_order})
 
 
-        # Stripe-Zahlungsabsicht erstellen
-        try:
-            intent = stripe.PaymentIntent.create(
-                amount=amount,
-                currency="usd",
-                payment_method=request.POST.get("payment_method_id"),
-                confirmation_method="manual",
-                confirm=True,
-            )
+# orders/views.py ou payments/views.py
+from django.shortcuts import render, redirect
+from cart.models import Cart
+from orders.models import Order  # ou orders.models
+from django.contrib.auth.decorators import login_required
 
-            # Zahlung speichern
-            payment = Payment.objects.create(
-                name=request.POST.get("name"),
-                email=request.POST.get("email"),
-                amount=amount / 100,  # Betrag wieder in USD/EUR umwandeln
-                stripe_payment_id=intent.id,
-            )
+@login_required
+def checkout_view(request):
+    cart = Cart.objects.filter(user=request.user).first()
 
-            return render(request, "payments/payment_success.html", {"payment": payment})
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        phone_number = request.POST.get('phone_number')
 
-        except stripe.error.CardError as e:
-            # Stripe-Fehler abfangen
-            return render(request, "payments/payment_failed.html", {"error": str(e)})
-    else:
-        return render(request, "payments/checkout.html", {"stripe_public_key": settings.STRIPE_PUBLIC_KEY})
+        # Crée une commande
+        order = Order.objects.create(
+            user=request.user,
+            cart=cart,
+            address=address,
+            city="",  # à adapter
+            postal_code="",
+            paid=True  # à adapter selon paiement
+        )
 
+        # Optionnel : vider le panier
+        cart.items.all().delete()
 
+        return redirect('orders:order_success')  # ou autre page
 
-
+    return render(request, 'orders/checkout.html', {'cart': cart})
+    
 

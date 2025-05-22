@@ -34,9 +34,7 @@
         </table>
         <form method="post" action="{% url 'orders:checkout' %}">
             {% csrf_token %}
-            <!-- andere Felder, z. B. Name, Email usw. -->
-            <input type="hidden" name="amount" value="{{ total_price }}">
-            <button type="submit" class="btn btn-primary">Jetzt bezahlen</button>
+            
         </form>
         
 
@@ -45,6 +43,6 @@
     {% endif %}
 </div>
 
-<a href="{% url 'orders:checkout' %}">Checkout</a>
+<a href="{% url 'orders:checkout_view' %}">Checkout</a>
 
 {% endblock %}
