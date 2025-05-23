@@ -1,13 +1,13 @@
 services:
   - type: web
-    name: shopping-platform
+    name: shopping-platform-v1
     env: python
-    buildCommand: ""
-    startCommand: gunicorn shopping_platform.wsgi
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn shopping_platform.wsgi"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: shopping_platform.settings
-      - key: SECRET_KEY
-        value: votre_clé_secrète_django
+      - key: "django-insecure-4f)hpxp_+ck7an-^^g*8ji$(fh38&^ddc7h@80l$iv3@rwa78!"
+        value: your_django_secret_key
       - key: DEBUG
         value: False
