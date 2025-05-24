@@ -22,3 +22,4 @@ class CheckoutForm(forms.Form):
     postal_code = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'placeholder': 'Postleitzahl'}))
     city = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Stadt'}))
     payment_method = forms.ChoiceField(choices=PAYMENT_METHOD_CHOICES, widget=forms.RadioSelect)
+
