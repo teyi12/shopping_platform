@@ -7,3 +7,44 @@ venv/
 .env
 staticfiles/
 media/
+
+
+# Fichiers Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Environnement virtuel
+env/
+venv/
+ENV/
+VENV/
+
+# Fichiers de base de données
+*.sqlite3
+
+# Fichiers de configuration
+*.env
+.env
+
+# Fichiers de log
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Fichiers de migration
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Dossiers statiques et médias
+/static/
+/media/
+
+# Fichiers spécifiques à l'IDE
+.vscode/
+.idea/
+.DS_Store
