@@ -70,12 +70,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'shopping_platform.wsgi.application'
 
 # Base de données par défaut (SQLite)
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600
+    )
 }
+
 
 # Validation des mots de passe
 AUTH_PASSWORD_VALIDATORS = [
@@ -101,8 +104,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://support.google.com/a/answer/176600?hl=en
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'teyi9lawson9@gmail.com'
-EMAIL_HOST_PASSWORD = 'kl'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
@@ -113,3 +117,9 @@ STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 
 # Clé par défaut pour auto-champs
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Sécurité pour production
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
