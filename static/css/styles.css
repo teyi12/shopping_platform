@@ -9,3 +9,13 @@ body {
 .navbar-brand {
     font-weight: bold;
 }
+
+/* static/css/styles.css */
+body {
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #333;
+}
