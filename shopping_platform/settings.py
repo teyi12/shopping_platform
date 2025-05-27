@@ -1,23 +1,24 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
-# Charger les variables d'environnement depuis .env
+# Charger les variables d'environnement
 load_dotenv()
 
-# Base directory du projet
+# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Clé secrète Django
+# Clé secrète
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# Mode debug (désactive en production)
+# Debug mode
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 # Hôtes autorisés
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
 
-# Applications Django
+# Applications installées
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'accounts',
     'cart',
     'orders',
@@ -44,8 +46,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Whitenoise pour servir les fichiers statiques en production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # URLconf
 ROOT_URLCONF = 'shopping_platform.urls'
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'shopping_platform.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # si tu utilises un dossier templates
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,18 +71,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'shopping_platform.wsgi.application'
 
-# Base de données par défaut (SQLite)
-import dj_database_url
-
+# Base de données (PostgreSQL via Render)
 DATABASES = {
     'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
     )
 }
-
-
 
 # Validation des mots de passe
 AUTH_PASSWORD_VALIDATORS = [
@@ -90,7 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Paramètres internationaux
+# Internationalisation
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -100,28 +98,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Fichiers médias
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# https://support.google.com/a/answer/176600?hl=en
+# Email (tu peux sécuriser ces infos via .env aussi)
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-
-# Clés Stripe
+# Stripe
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 
-# Clé par défaut pour auto-champs
+# AutoField par défaut
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# Sécurité pour production
-SECURE_SSL_REDIRECT = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
