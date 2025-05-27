@@ -1,18 +1,6 @@
 __pycache__/
 *.py[cod]
 *.sqlite3
-env/
-venv/
-.DS_Store
-.env
-staticfiles/
-media/
-
-
-# Fichiers Python
-__pycache__/
-*.py[cod]
-*.so
 
 # Environnement virtuel
 env/
@@ -20,17 +8,17 @@ venv/
 ENV/
 VENV/
 
-# Fichiers de base de données
-*.sqlite3
+# Fichiers système
+.DS_Store
+.vscode/
+.idea/
 
-# Fichiers de configuration
+# Fichiers de config/env
 *.env
 .env
 
-# Fichiers de log
+# Logs et temporaires
 *.log
-
-# Fichiers temporaires
 *.tmp
 *.bak
 *.swp
@@ -40,11 +28,3 @@ VENV/
 **/migrations/*.py
 !**/migrations/__init__.py
 
-# Dossiers statiques et médias
-/static/
-/media/
-
-# Fichiers spécifiques à l'IDE
-.vscode/
-.idea/
-.DS_Store

@@ -3,7 +3,7 @@ services:
     name: shopping-platform
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn shopping_platform.wsgi:application
+    startCommand: ./start.sh
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: shopping_platform.settings
@@ -11,3 +11,13 @@ services:
         sync: false
       - key: DEBUG
         value: 'False'
+      - key: DATABASE_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLIC_KEY
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false

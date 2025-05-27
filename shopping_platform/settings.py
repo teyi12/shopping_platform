@@ -97,6 +97,7 @@ USE_TZ = True
 # Fichiers statiques
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Fichiers médias
 MEDIA_URL = '/media/'
@@ -116,3 +117,8 @@ STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 
 # AutoField par défaut
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Sécurité pour production
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
