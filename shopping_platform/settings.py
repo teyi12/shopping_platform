@@ -11,17 +11,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "your-default-secret-key")
 
 DEBUG = os.environ.get("DEBUG", "False") == "True"
-
-
-
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 
+# Valeurs par défaut
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
+# Ajout de Render host si présent
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
+# Ajout depuis la variable d'environnement ALLOWED_HOSTS (Render YAML)
+additional_hosts = os.environ.get("ALLOWED_HOSTS", "")
+if additional_hosts:
+    ALLOWED_HOSTS += [host.strip() for host in additional_hosts.split(",") if host.strip()]
 
 # Application installée
 INSTALLED_APPS = [

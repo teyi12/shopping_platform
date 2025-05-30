@@ -1,30 +1,37 @@
+# Bytecode Python
 __pycache__/
 *.py[cod]
+
+# Base de données locale
 *.sqlite3
 
-# Environnement virtuel
+# Environnements virtuels
 env/
 venv/
 ENV/
 VENV/
 
-# Fichiers système
+# Fichiers système & IDE
 .DS_Store
 .vscode/
 .idea/
 
-# Fichiers de config/env
-*.env
+# Fichiers de configuration sensibles
 .env
+*.env
 
-# Logs et temporaires
+# Fichiers de log & temporaires
 *.log
 *.tmp
 *.bak
 *.swp
 *.swo
 
-# Fichiers de migration
+# Migrations sauf __init__.py
 **/migrations/*.py
 !**/migrations/__init__.py
+
+# Fichiers générés par Django
+staticfiles/
+media/
 
