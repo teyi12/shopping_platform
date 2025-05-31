@@ -2,8 +2,13 @@ services:
   - type: web
     name: shopping-platform
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: ./start.sh
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+
+    startCommand: bash ./start.sh  # ✅ utilise bash (pas ./start.sh seul)
+
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: shopping_platform.settings
@@ -25,4 +30,16 @@ services:
         value: shopping-platform.onrender.com
       - key: PORT
         value: '8000'
+
+      # Optionnel : pour créer automatiquement un superuser
+      - key: CREATE_SUPERUSER
+        value: 'true'
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+
+
 
