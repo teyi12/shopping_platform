@@ -14,7 +14,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 
 # Valeurs par défaut
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ['.onrender.com',"127.0.0.1", "localhost"]
 
 # Ajout de Render host si présent
 if RENDER_EXTERNAL_HOSTNAME:
