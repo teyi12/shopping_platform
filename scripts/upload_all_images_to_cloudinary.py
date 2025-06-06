@@ -5,6 +5,10 @@ import django
 import cloudinary.uploader
 import cloudinary
 
+import sys
+
+# Ajoute la racine du projet au path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Initialisation Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopping_platform.settings')
