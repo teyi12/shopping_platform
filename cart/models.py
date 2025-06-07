@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from shop.models import Product
-from django.conf import settings
+
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
