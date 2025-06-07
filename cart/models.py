@@ -4,21 +4,18 @@ from shop.models import Product
 from django.conf import settings
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
     created_at = models.DateTimeField(auto_now_add=True)
-
-    
 
     def __str__(self):
         return f"Cart of {self.user.username}"
-    
+
     def total_price(self):
         return sum(item.total_price() for item in self.items.all())
-    
+
     def clear(self):
-        """Löscht alle Artikel im Warenkorb."""
         self.items.all().delete()
-    
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
@@ -31,9 +28,5 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.product.name} (x{self.quantity})"
 
-    def clear(self):
-        """Löscht alle Artikel im Warenkorb."""
-        self.items.all().delete()
-    
 
 

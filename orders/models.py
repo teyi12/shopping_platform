@@ -7,7 +7,7 @@ from payments.models import Payment
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=[
         ('Pending', 'Pending'),
@@ -18,7 +18,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id}"
-    
+
+    def total_price(self):
+        return sum(item.get_total_price() for item in self.items.all())
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
@@ -29,7 +32,7 @@ class OrderItem(models.Model):
     def get_total_price(self):
         return self.product.price * self.quantity
 
-
     def __str__(self):
         return f"{self.quantity} of {self.product.name}"
+
 

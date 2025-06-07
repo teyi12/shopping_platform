@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Category, Product
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name',)
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    def delete_model(self, request, obj):
-        # Führen Sie benutzerdefinierte Logik vor dem Löschen aus
-        print(f"Produkt wird gelöscht: {obj.name}")
-        super().delete_model(request, obj)
-
-
-
-admin.site.register(Category)
+    list_display = ('name', 'price', 'stock', 'category')
+    list_filter = ('category',)
+    search_fields = ('name', 'description')

@@ -11,9 +11,7 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s Profile"
 
 
-
-
-
+    
 
 
 
