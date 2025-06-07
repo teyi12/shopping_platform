@@ -1,28 +1,52 @@
-# Fichier de configuration sensible
-.env
-
-# Fichiers/Dossiers Python
+# Python
 __pycache__/
 *.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environnement
+.env
+*.env
+
+# Django
 *.sqlite3
-
-# Dossier virtuel (à adapter si tu as un autre nom)
-venv/
-env/
-
-# Fichiers/Dossiers de Django
-staticfiles/
-media/
 db.sqlite3
+media/
+staticfiles/
 
-# Fichiers de logs
-*.log
+# Virtualenv
+venv/
+ENV/
+env/
+.venv/
 
-# IDE
+# VSCode / IDE
 .vscode/
 .idea/
 
-# Système
+# macOS
 .DS_Store
 
-media/
+# Logs
+*.log
+
+# Pytest / coverage
+htmlcov/
+.coverage
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.cache
+
+# Type checking
+.mypy_cache/
+.pytype/
+.pyre/
+
+# Render (fichiers temporaires ou PID)
+*.pid
+*.tar
